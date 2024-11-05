@@ -19,9 +19,9 @@ cat machines.txt
 ```
 
 ```text
-XXX.XXX.XXX.XXX server.kubernetes.local server  
-XXX.XXX.XXX.XXX node-0.kubernetes.local node-0 10.200.0.0/24
-XXX.XXX.XXX.XXX node-1.kubernetes.local node-1 10.200.1.0/24
+192.168.0.122 server.kubernetes.local server
+192.168.0.123 node-0.kubernetes.local node-0 10.200.0.0/24
+192.168.0.124 node-1.kubernetes.local node-1 10.200.1.0/24
 ```
 
 Now it's your turn to create a `machines.txt` file with the details for the three machines you will be using to create your Kubernetes cluster. Use the example machine database from above and add the details for your machines. 
@@ -90,9 +90,9 @@ done < machines.txt
 ```
 
 ```text
-aarch64 GNU/Linux
-aarch64 GNU/Linux
-aarch64 GNU/Linux
+x86_64 GNU/Linux
+x86_64 GNU/Linux
+x86_64 GNU/Linux
 ```
 
 ## Hostnames
@@ -154,9 +154,10 @@ cat hosts
 ```text
 
 # Kubernetes The Hard Way
-XXX.XXX.XXX.XXX server.kubernetes.local server
-XXX.XXX.XXX.XXX node-0.kubernetes.local node-0
-XXX.XXX.XXX.XXX node-1.kubernetes.local node-1
+192.168.0.122 server.kubernetes.local server
+192.168.0.123 node-0.kubernetes.local node-0
+192.168.0.124 node-1.kubernetes.local node-1
+
 ```
 
 ## Adding DNS Entries To A Local Machine
@@ -176,20 +177,21 @@ cat /etc/hosts
 ```
 
 ```text
-127.0.0.1       localhost
-127.0.1.1       jumpbox
+
+127.0.0.1 localhost
+127.0.1.1 jumpbox.kubernetes.local jumpbox
 
 # The following lines are desirable for IPv6 capable hosts
-::1     localhost ip6-localhost ip6-loopback
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 
-
-
 # Kubernetes The Hard Way
-XXX.XXX.XXX.XXX server.kubernetes.local server
-XXX.XXX.XXX.XXX node-0.kubernetes.local node-0
-XXX.XXX.XXX.XXX node-1.kubernetes.local node-1
+192.168.0.122 server.kubernetes.local server
+192.168.0.123 node-0.kubernetes.local node-0
+192.168.0.124 node-1.kubernetes.local node-1
 ```
 
 At this point you should be able to SSH to each machine listed in the `machines.txt` file using a hostname.
@@ -201,9 +203,9 @@ done
 ```
 
 ```text
-server aarch64 GNU/Linux
-node-0 aarch64 GNU/Linux
-node-1 aarch64 GNU/Linux
+server x86_64 GNU/Linux
+node-0 x86_64 GNU/Linux
+node-1 x86_64 GNU/Linux
 ```
 
 ## Adding DNS Entries To The Remote Machines
