@@ -100,26 +100,42 @@ wget -q --show-progress \
   -P downloads \
   -i downloads_kaium.txt
 ```
+Screen Output:
 
-Depending on your internet connection speed it may take a while to download the `584` megabytes of binaries, and once the download is complete, you can list them using the `ls` command:
+```text
+kube-apiserver                   100%[==========================================================>]  86.35M   349KB/s    in 3m 50s
+kube-controller-manager          100%[==========================================================>]  80.82M   455KB/s    in 3m 17s
+kube-scheduler                   100%[==========================================================>]  60.77M   506KB/s    in 2m 42s
+crictl-v1.31.1-linux-amd64.tar.g 100%[==========================================================>]  17.55M   474KB/s    in 41s
+runc.amd64                       100%[==========================================================>]  10.65M   442KB/s    in 24s
+cni-plugins-linux-amd64-v1.6.0.t 100%[==========================================================>]  50.27M   498KB/s    in 1m 59s
+containerd-1.7.23-linux-amd64.ta 100%[==========================================================>]  45.71M   386KB/s    in 1m 48s
+kube-proxy                       100%[==========================================================>]  61.43M   355KB/s    in 2m 40s
+kubelet                          100%[==========================================================>]  73.34M   449KB/s    in 3m 3s
+etcd-v3.5.16-linux-amd64.tar.gz  100%[==========================================================>]  19.54M   431KB/s    in 44s
+
+```
+
+Depending on your internet connection speed it may take a while to download the `561` megabytes of binaries, and once the download is complete, you can list them using the `ls` command:
 
 ```bash
 ls -loh downloads
 ```
 
 ```text
-total 584M
--rw-r--r-- 1 root  41M May  9 13:35 cni-plugins-linux-arm64-v1.3.0.tgz
--rw-r--r-- 1 root  34M Oct 26 15:21 containerd-1.7.8-linux-arm64.tar.gz
--rw-r--r-- 1 root  22M Aug 14 00:19 crictl-v1.28.0-linux-arm.tar.gz
--rw-r--r-- 1 root  15M Jul 11 02:30 etcd-v3.4.27-linux-arm64.tar.gz
--rw-r--r-- 1 root 111M Oct 18 07:34 kube-apiserver
--rw-r--r-- 1 root 107M Oct 18 07:34 kube-controller-manager
--rw-r--r-- 1 root  51M Oct 18 07:34 kube-proxy
--rw-r--r-- 1 root  52M Oct 18 07:34 kube-scheduler
--rw-r--r-- 1 root  46M Oct 18 07:34 kubectl
--rw-r--r-- 1 root 101M Oct 18 07:34 kubelet
--rw-r--r-- 1 root 9.6M Aug 10 18:57 runc.arm64
+total 561M
+-rw-r--r-- 1 root 51M Oct 15 09:37 cni-plugins-linux-amd64-v1.6.0.tgz
+-rw-r--r-- 1 root 46M Oct 14 20:47 containerd-1.7.23-linux-amd64.tar.gz
+-rw-r--r-- 1 root 18M Aug 13 10:48 crictl-v1.31.1-linux-amd64.tar.gz
+-rw-r--r-- 1 root 20M Sep 10 18:31 etcd-v3.5.16-linux-amd64.tar.gz
+-rw-r--r-- 1 root 87M Oct 23 04:41 kube-apiserver
+-rw-r--r-- 1 root 81M Oct 23 04:41 kube-controller-manager
+-rw-r--r-- 1 root 54M Nov  5 17:54 kubectl
+-rw-r--r-- 1 root 74M Oct 23 04:41 kubelet
+-rw-r--r-- 1 root 62M Oct 23 04:41 kube-proxy
+-rw-r--r-- 1 root 61M Oct 23 04:41 kube-scheduler
+-rw-r--r-- 1 root 11M Nov  1 22:23 runc.amd64
+
 ```
 
 ### Install kubectl
@@ -134,6 +150,16 @@ Use the `chmod` command to make the `kubectl` binary executable and move it to t
   cp downloads/kubectl /usr/local/bin/
 }
 ```
+you can check using the `ls` command:
+
+```bash
+ls -loh /usr/local/bin/ | grep kubectl
+```
+
+Output:
+```text
+-rwxr-xr-x 1 root 54M Nov  5 19:51 kubectl
+```
 
 At this point `kubectl` is installed and can be verified by running the `kubectl` command:
 
@@ -142,8 +168,8 @@ kubectl version --client
 ```
 
 ```text
-Client Version: v1.28.3
-Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
+Client Version: v1.31.2
+Kustomize Version: v5.4.2
 ```
 
 At this point the `jumpbox` has been set up with all the command line tools and utilities necessary to complete the labs in this tutorial.
