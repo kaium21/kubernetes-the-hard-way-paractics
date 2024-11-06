@@ -66,11 +66,60 @@ for i in ${certs[*]}; do
     -out "${i}.crt"
 done
 ```
+Result:
+```text
+Certificate request self-signature ok
+subject=CN = admin, O = system:masters
+Certificate request self-signature ok
+subject=CN = system:node:node-0, O = system:nodes, C = US, ST = Washington, L = Seattle
+Certificate request self-signature ok
+subject=CN = system:node:node-1, O = system:nodes, C = US, ST = Washington, L = Seattle
+Certificate request self-signature ok
+subject=CN = system:kube-proxy, O = system:node-proxier, C = US, ST = Washington, L = Seattle
+Certificate request self-signature ok
+subject=CN = system:kube-scheduler, O = system:system:kube-scheduler, C = US, ST = Washington, L = Seattle
+Certificate request self-signature ok
+subject=CN = system:kube-controller-manager, O = system:kube-controller-manager, C = US, ST = Washington, L = Seattle
+Certificate request self-signature ok
+subject=CN = kubernetes, C = US, ST = Washington, L = Seattle
+Certificate request self-signature ok
+subject=CN = service-accounts
+
+```
 
 The results of running the above command will generate a private key, certificate request, and signed SSL certificate for each of the Kubernetes components. You can list the generated files with the following command:
 
 ```bash
 ls -1 *.crt *.key *.csr
+```
+Result:
+```text
+admin.crt
+admin.csr
+admin.key
+ca.crt
+ca.key
+kube-api-server.crt
+kube-api-server.csr
+kube-api-server.key
+kube-controller-manager.crt
+kube-controller-manager.csr
+kube-controller-manager.key
+kube-proxy.crt
+kube-proxy.csr
+kube-proxy.key
+kube-scheduler.crt
+kube-scheduler.csr
+kube-scheduler.key
+node-0.crt
+node-0.csr
+node-0.key
+node-1.crt
+node-1.csr
+node-1.key
+service-accounts.crt
+service-accounts.csr
+service-accounts.key
 ```
 
 ## Distribute the Client and Server Certificates
@@ -92,6 +141,16 @@ for host in node-0 node-1; do
     root@$host:/var/lib/kubelet/kubelet.key
 done
 ```
+Result:
+```text
+ca.crt                                                                                            100% 1899     1.6MB/s   00:00
+node-0.crt                                                                                        100% 2147     2.2MB/s   00:00
+node-0.key                                                                                        100% 3272     3.7MB/s   00:00
+ca.crt                                                                                            100% 1899     1.9MB/s   00:00
+node-1.crt                                                                                        100% 2147     1.9MB/s   00:00
+node-1.key                                                                                        100% 3272     2.7MB/s   00:00
+
+```
 
 Copy the appropriate certificates and private keys to the `server` machine:
 
@@ -102,6 +161,16 @@ scp \
   service-accounts.key service-accounts.crt \
   root@server:~/
 ```
+Result:
+```text
+ca.key                                                                                            100% 3272     2.4MB/s   00:00
+ca.crt                                                                                            100% 1899     2.5MB/s   00:00
+kube-api-server.key                                                                               100% 3272     1.8MB/s   00:00
+kube-api-server.crt                                                                               100% 2354     3.0MB/s   00:00
+service-accounts.key                                                                              100% 3272     1.3MB/s   00:00
+service-accounts.crt                                                                              100% 2004   559.8KB/s   00:00
+```
+
 
 > The `kube-proxy`, `kube-controller-manager`, `kube-scheduler`, and `kubelet` client certificates will be used to generate client authentication configuration files in the next lab.
 
