@@ -152,6 +152,12 @@ Create the `system:kube-apiserver-to-kubelet` [ClusterRole](https://kubernetes.i
 kubectl apply -f kube-apiserver-to-kubelet.yaml \
   --kubeconfig admin.kubeconfig
 ```
+Output:
+```text
+clusterrole.rbac.authorization.k8s.io/system:kube-apiserver-to-kubelet created
+clusterrolebinding.rbac.authorization.k8s.io/system:kube-apiserver created
+
+```
 
 ### Verification
 
@@ -164,7 +170,7 @@ curl -k --cacert ca.crt https://server.kubernetes.local:6443/version
 ```
 
 ```text
-{
+/*{
   "major": "1",
   "minor": "28",
   "gitVersion": "v1.28.3",
@@ -174,6 +180,17 @@ curl -k --cacert ca.crt https://server.kubernetes.local:6443/version
   "goVersion": "go1.20.10",
   "compiler": "gc",
   "platform": "linux/arm64"
+}*/
+{
+  "major": "1",
+  "minor": "31",
+  "gitVersion": "v1.31.2",
+  "gitCommit": "5864a4677267e6adeae276ad85882a8714d69d9d",
+  "gitTreeState": "clean",
+  "buildDate": "2024-10-22T20:28:14Z",
+  "goVersion": "go1.22.8",
+  "compiler": "gc",
+  "platform": "linux/amd64"
 }
 ```
 
