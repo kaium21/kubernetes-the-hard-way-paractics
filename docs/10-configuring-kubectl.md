@@ -27,6 +27,17 @@ curl -k --cacert ca.crt \
   "compiler": "gc",
   "platform": "linux/arm64"
 }
+{
+  "major": "1",
+  "minor": "31",
+  "gitVersion": "v1.31.2",
+  "gitCommit": "5864a4677267e6adeae276ad85882a8714d69d9d",
+  "gitTreeState": "clean",
+  "buildDate": "2024-10-22T20:28:14Z",
+  "goVersion": "go1.22.8",
+  "compiler": "gc",
+  "platform": "linux/amd64"
+}
 ```
 
 Generate a kubeconfig file suitable for authenticating as the `admin` user:
@@ -64,6 +75,11 @@ kubectl version
 Client Version: v1.28.3
 Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
 Server Version: v1.28.3
+
+Client Version: v1.31.2
+Kustomize Version: v5.4.2
+Server Version: v1.31.2
+
 ```
 
 List the nodes in the remote Kubernetes cluster:
