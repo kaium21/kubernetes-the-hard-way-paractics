@@ -8,7 +8,7 @@ Copy `etcd` binaries and systemd unit files to the `server` instance:
 
 ```bash
 scp \
-  downloads/etcd-v3.4.27-linux-arm64.tar.gz \
+  downloads/etcd-v3.5.16-linux-amd64.tar.gz \
   units/etcd.service \
   root@server:~/
 ```
