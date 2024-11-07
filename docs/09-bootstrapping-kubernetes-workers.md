@@ -39,6 +39,25 @@ for host in node-0 node-1; do
     units/kube-proxy.service \
     root@$host:~/
 done
+for host in node-0 node-1; do
+  scp \
+    downloads/runc.amd64 \
+    downloads/crictl-v1.31.1-linux-amd64.tar.gz \
+    downloads/cni-plugins-linux-amd64-v1.6.0.tgz \
+    downloads/containerd-1.7.23-linux-amd64.tar.gz \
+    downloads/kubectl \
+    downloads/kubelet \
+    downloads/kube-proxy \
+    configs/99-loopback.conf \
+    configs/containerd-config.toml \
+    configs/kubelet-config.yaml \
+    configs/kube-proxy-config.yaml \
+    units/containerd.service \
+    units/kubelet.service \
+    units/kube-proxy.service \
+    root@$host:~/
+done
+
 ```
 
 The commands in this lab must be run on each worker instance: `node-0`, `node-1`. Login to the worker instance using the `ssh` command. Example:
@@ -103,6 +122,18 @@ Install the worker binaries:
   mv crictl kubectl kube-proxy kubelet runc /usr/local/bin/
   mv containerd/bin/* /bin/
 }
+
+{
+  mkdir -p containerd
+  tar -xvf crictl-v1.31.1-linux-amd64.tar.gz
+  tar -xvf containerd-1.7.23-linux-amd64.tar.gz -C containerd
+  tar -xvf cni-plugins-linux-amd64-v1.6.0.tgz -C /opt/cni/bin/
+  mv runc.amd64 runc
+  chmod +x crictl kubectl kube-proxy kubelet runc 
+  mv crictl kubectl kube-proxy kubelet runc /usr/local/bin/
+  mv containerd/bin/* /bin/
+}
+
 ```
 
 ### Configure CNI Networking
