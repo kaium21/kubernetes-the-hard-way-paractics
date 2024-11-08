@@ -146,7 +146,7 @@ kubectl exec -ti $POD_NAME -- nginx -v
 ```
 
 ```text
-nginx version: nginx/1.25.3
+nginx version: nginx/1.27.2
 ```
 
 ## Services
